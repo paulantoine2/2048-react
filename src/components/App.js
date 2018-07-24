@@ -29,17 +29,13 @@ class App extends Component {
         this.moving = true;
         this.props.moveNumbers(direction);
         let score = this.getBiggestNumber();
-        if (this.getPossibilities() > 0 && this.getVisibleNumbers() >= 4) {
+        if (this.getPossibilities() === 0 && this.getVisibleNumbers() >= 16) {
             this.end_game = <Result result={'lose'} score={score} onValidate={this.startGame.bind(this)}/>;
         }
-
         if (score === 2048) {
             this.end_game = <Result result={'win'} score={score} onValidate={this.startGame}/>;
         }
-        if (this.getPossibilities() === 0 && this.getVisibleNumbers() >= 16) {
-            console.log('lose');
 
-        }
         setTimeout(() => {
             if (this.props.numbers.has_moved) {
                 this.props.addNumber(2);
